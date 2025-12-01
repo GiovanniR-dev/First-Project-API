@@ -1,81 +1,49 @@
-# 🚀 First-Project-API | Cadastro de Usuários (Fullstack)
+# 💻 Frontend do Projeto First-Project-API | Formulário de Cadastro de Usuários
 
 ## 🌟 Visão Geral
 
-Este projeto é uma aplicação Fullstack simples, desenvolvida para demonstrar a criação de uma **API RESTful** utilizando **Spring Boot (Java)** no Backend, e uma interface de cadastro no Frontend, utilizando **HTML, CSS e JavaScript**.
-
-O objetivo é fornecer uma solução funcional para o gerenciamento de dados de usuários, com foco na arquitetura e na comunicação entre as duas camadas (Cliente e Servidor).
-
-## 🛠️ Tecnologias Utilizadas
-
-| Categoria | Tecnologia | Detalhes |
-| :--- | :--- | :--- |
-| **Backend (API)** | Java / Spring Boot | API RESTful com Endpoints CRUD para o recurso `/usuarios`. |
-| **Persistência** | Spring Data JPA | Utilizado para facilitar a comunicação com o banco de dados. |
-| **Frontend (UI)** | HTML, CSS e JavaScript | Interface simples para consumo da API. |
-| **Gerenciador** | Maven | Utilizado para gestão de dependências e construção do projeto. |
-| **Banco de Dados** | H2 Database (ou configurável) | Utilizado para persistência dos dados de `Usuario`. |
-
-## 💻 Como Executar o Projeto
-
-### 1. Pré-requisitos
-* Java Development Kit (JDK) 17 ou superior.
-* Maven 3.x.
-
-### 2. Executando o Backend (API)
-
-1.  **Clone o repositório:**
-    ```bash
-    git clone [https://github.com/SeuUsuario/First-Project-API.git](https://github.com/SeuUsuario/First-Project-API.git)
-    cd First-Project-API
-    ```
-
-2.  **Execute o Spring Boot:**
-    * O Spring Boot se encarregará de iniciar o servidor na porta padrão `8080`.
-    ```bash
-    ./mvnw spring-boot:run
-    # Se estiver no Windows:
-    # mvnw.cmd spring-boot:run
-    ```
-
-### 3. Executando o Frontend (Interface de Cadastro)
-
-1.  **Navegue** até a pasta que contém o arquivo `index.html`.
-2.  **Abra o arquivo `index.html`** diretamente no seu navegador.
-
-A interface fará requisições `POST` para `http://localhost:8080/usuarios`.
-
-## 📌 Endpoints da API (Recurso: `/usuarios`)
-
-A API expõe as operações CRUD básicas para o recurso `Usuario`:
-
-| Método | Endpoint | Descrição | Classe/Interface |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/usuarios` | Retorna uma lista de todos os usuários cadastrados. | `UsuarioController` |
-| `POST` | `/usuarios` | Cria um novo usuário. | `UsuarioController` |
-| `PUT` | `/usuarios` | Atualiza um usuário existente. | `UsuarioController` |
-| `DELETE` | `/usuarios/{id}` | Exclui um usuário pelo `id`. | `UsuarioController` |
-
-### Estrutura do Objeto `Usuario`
-
-O modelo de dados esperado para o cadastro é:
-
-| Campo | Tipo | Descrição |
-| :--- | :--- | :--- |
-| `id` | `Integer` | Chave primária (gerada automaticamente). |
-| `nome` | `String` | Nome completo do usuário. |
-| `email` | `String` | Endereço de e-mail. |
-| `senha` | `String` | Senha do usuário. |
-| `telefone` | `String` | Número de telefone. |
+Esta seção do projeto representa a interface de usuário (Frontend) desenvolvida em **HTML, CSS e JavaScript**. Seu principal objetivo é fornecer um formulário de cadastro simples e funcional para que o usuário possa interagir com a API de Backend, realizando a operação de **Cadastro (Create)** de novos usuários.
 
 ---
 
-## 💡 Próximos Passos e Melhorias
+## 🛠️ Tecnologias e Arquivos
 
-Algumas ideias para evoluir este projeto:
-
-* **Validação Frontend:** Adicionar validação JavaScript para garantir que os campos não estão vazios antes de enviar a requisição.
-* **Melhoria de UI/UX:** Adicionar mensagens de sucesso ou erro (via JavaScript) para feedback ao usuário após o envio do formulário.
-* **Security:** Implementar autenticação básica (ex: Spring Security) na API.
+| Tecnologia | Arquivo | Função no Projeto |
+| :--- | :--- | :--- |
+| **HTML** | `index.html` | Define a estrutura do formulário, com campos para Nome, Email, Senha e Telefone. |
+| **CSS** | `style.css` | Responsável pela estilização visual (cores, layout, centralização do `.box` e `form`), utilizando o fundo roxo escuro (`rgb(42, 22, 95)`). |
+| **JavaScript** | `script.js` | Lógica de interação, captura de dados do formulário e envio da requisição `POST` para a API. |
 
 ---
+
+## 🔗 Funcionamento: Comunicação com a API
+
+A lógica para enviar os dados para o Backend está implementada no arquivo `script.js`.
+
+### 1. Captura e Envio de Dados
+
+O `script.js` escuta o evento de `submit` do formulário (`formulario.addEventListener`). A função `cadastrar()` é então executada:
+
+* **Endpoint Alvo:** A requisição é enviada via `fetch` para `http://localhost:8080/usuarios`.
+* **Método:** Utiliza o método **`POST`**.
+* **Corpo da Requisição (JSON):** Os valores dos campos (`.nome`, `.email`, `.senha`, `.tel`) são capturados e enviados no corpo (`body`) da requisição, formatados como JSON.
+
+### 2. Fluxo de Interação
+1.  O formulário é submetido, prevenindo o *reload* da página (`event.preventDefault()`).
+2.  A função `cadastrar()` envia os dados para a API.
+3.  A função `limpar()` zera os valores de todos os campos do formulário imediatamente após o envio.
+4.  O resultado da resposta da API é registrado no console do navegador (`console.log(res)`) para depuração.
+
+---
+
+## 🏃 Como Testar
+
+1.  Certifique-se de que a API de Backend (no endereço `http://localhost:8080`) esteja em execução.
+2.  Abra o arquivo **`index.html`** no seu navegador.
+3.  Preencha todos os campos do formulário (Nome, Email, Senha, Telefone).
+4.  Clique no botão **"Cadastrar"**.
+5.  Abra o console do seu navegador (**F12**) para verificar a resposta (`res`) da API e confirmar o sucesso do cadastro.
+
+---
+
+Se precisar de ajuda para implementar mensagens de sucesso/erro na tela para o usuário, me avise!
